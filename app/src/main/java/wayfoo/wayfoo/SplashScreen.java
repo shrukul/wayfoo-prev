@@ -15,8 +15,14 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.view.Display;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 
 public class SplashScreen extends Activity {
 
@@ -25,6 +31,17 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+        KenBurnsView kbv = (KenBurnsView)findViewById(R.id.kbv_splash_image);
+        kbv.setImageResource(R.drawable.splash2);
+        DecelerateInterpolator DECELERATE = new DecelerateInterpolator();
+        AccelerateDecelerateInterpolator ACCELERATE_DECELERATE = new AccelerateDecelerateInterpolator();
+        LinearInterpolator lip = new LinearInterpolator();
+        lip.getInterpolation(100);
+        RandomTransitionGenerator generator = new RandomTransitionGenerator(2800, lip);
+        //duration = 10000ms = 10s and interpolator = ACCELERATE_DECELERATE
+        kbv.setTransitionGenerator(generator); //set new transition on kbv
+//        RandomTransitionGenerator localRandomTransitionGenerator = new RandomTransitionGenerator(3000L, new LinearInterpolator());
+//        kbv.setTransitionGenerator(localRandomTransitionGenerator);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -58,7 +58,6 @@ public class MyRecyclerAdapter extends
 			this.imageView = (ImageView) view.findViewById(R.id.thumbnail);
 			this.textView = (TextView) view.findViewById(R.id.title1);
 			this.place = (TextView) view.findViewById(R.id.Place);
-			this.fav = (ToggleButton) view.findViewById(R.id.fav);
 			mc = view.getContext();
 			card = (CardView) view.findViewById(R.id.YogaCard);
 			card.setOnClickListener(this);
@@ -71,8 +70,9 @@ public class MyRecyclerAdapter extends
 			FeedItem feedItem = feedItemList.get(i);
 			String pagenext;
 			pagenext=Html.fromHtml(feedItem.getTitle()).toString();
-			Intent intent = new Intent(mc, SimpleScannerActivity.class);
-			intent.putExtra("name", pagenext);
+			Intent intent = new Intent(mc, Intermediate.class);
+			intent.putExtra("title", pagenext);
+			intent.putExtra("table", "1");
 			mc.startActivity(intent);
 		}
 	}
@@ -98,7 +98,7 @@ public class MyRecyclerAdapter extends
 		final FeedItem feedItem = feedItemList.get(i);
 
 		Picasso.with(mContext).load(feedItem.getThumbnail())
-				.error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher)
+				.error(R.mipmap.logo).placeholder(R.mipmap.logo)
 				.into(customViewHolder.imageView);
 
 		Typeface font1 = Typeface.createFromAsset(mContext.getAssets(),
@@ -115,75 +115,11 @@ public class MyRecyclerAdapter extends
 		SS.setSpan(new CustomTypeFace("", font), 0, SS.length(),
 				Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 		customViewHolder.place.setText(Html.fromHtml(feedItem.getPlace()));
-		customViewHolder.fav.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(!customViewHolder.fav.isChecked()){
-					List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-					SharedPreferences pref = PreferenceManager
-							.getDefaultSharedPreferences(mc);
-					String email = pref.getString("KEY_E", null);
-					nameValuePair.add(new BasicNameValuePair("CID", feedItem.getID()));
-					nameValuePair.add(new BasicNameValuePair("mail", email));
-					AsyncHttpPost async = new AsyncHttpPost(MyRecyclerAdapter.this, nameValuePair);
-					async.execute("http://www.wayfoo.in/favadd.php");
-				} else{
-					List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-					SharedPreferences pref = PreferenceManager
-							.getDefaultSharedPreferences(mc);
-					String email = pref.getString("KEY_E", null);
-					nameValuePair.add(new BasicNameValuePair("CID", feedItem.getID()));
-					nameValuePair.add(new BasicNameValuePair("mail", email));
-					AsyncHttpPost async = new AsyncHttpPost(MyRecyclerAdapter.this, nameValuePair);
-					async.execute("http://www.wayfoo.in/favrem.php");
-				}
-			}
-		});
-	}
 
+	}
 	@Override
 	public int getItemCount() {
 		return (null != feedItemList ? feedItemList.size() : 0);
 	}
 
-	public class AsyncHttpPost extends AsyncTask<String, String, String> {
-		TextView t;
-		MyRecyclerAdapter ma;
-		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-
-		public AsyncHttpPost(MyRecyclerAdapter m, List<NameValuePair> nvp) {
-			ma = m;
-			nameValuePair = nvp;
-		}
-
-		@Override
-		protected String doInBackground(String... params) {
-			byte[] result = null;
-			String str = "";
-			HttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost(params[0]);
-			try {
-				post.setEntity(new UrlEncodedFormEntity(nameValuePair));
-				HttpResponse response = client.execute(post);
-				StatusLine statusLine = response.getStatusLine();
-				if (statusLine.getStatusCode() == HttpURLConnection.HTTP_OK) {
-					result = EntityUtils.toByteArray(response.getEntity());
-					str = new String(result, "UTF-8");
-				}
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return str;
-		}
-
-		@Override
-		protected void onPostExecute(String output) {
-			// do something with the string returned earlier
-			Toast.makeText(mc, "done with " + output,
-				Toast.LENGTH_SHORT).show();
-		}
-
-	}
 }

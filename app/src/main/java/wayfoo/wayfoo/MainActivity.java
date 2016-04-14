@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     private MyRecyclerAdapter adapter;
     private ProgressBar progressBar;
     AsyncHttpTask a;
-    private ToggleButton fav;
     ImageView b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         b=(ImageView)findViewById(R.id.qqq);
-        fav=(ToggleButton)findViewById(R.id.fav);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         SharedPreferences pref = PreferenceManager
                 .getDefaultSharedPreferences(this);
@@ -67,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         final String url = "http://wayfoo.com/hotellist.php?Location="+loc;
         a = new AsyncHttpTask();
         a.execute(url);
-        final String url2 = "http://wayfoo.com/fav.php";
 /*        ImageView icon = new ImageView(this);
         icon.setImageResource(R.mipmap.fab);*/
 

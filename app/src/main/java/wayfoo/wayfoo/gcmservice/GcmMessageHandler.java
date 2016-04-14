@@ -47,7 +47,7 @@ public class GcmMessageHandler extends GcmListenerService {
         mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());*/
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         android.support.v7.app.NotificationCompat.Builder mBuilder = (android.support.v7.app.NotificationCompat.Builder) new android.support.v7.app.NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.notify)
+                .setSmallIcon(R.drawable.food)
                 .setContentTitle("Wayfoo")
                 .setContentText(typ)
                 .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.app_icon))

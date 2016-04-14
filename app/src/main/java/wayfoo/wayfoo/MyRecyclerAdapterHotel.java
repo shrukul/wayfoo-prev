@@ -51,31 +51,8 @@ public class MyRecyclerAdapterHotel extends
             this.price = (TextView) view.findViewById(R.id.price);
             this.plus = (Button) view.findViewById(R.id.add);
             this.amt = (TextView) view.findViewById(R.id.amt);
-            this.ll = (LinearLayout) view.findViewById(R.id.ll);
-            this.note = (EditText) view.findViewById(R.id.note);
-            this.edit = (Button) view.findViewById(R.id.edit_note);
-            this.note_text = (TextView) view.findViewById(R.id.note_text);
             mc = view.getContext();
             card = (CardView) view.findViewById(R.id.YogaCard);
-            card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(ll.getVisibility()==View.GONE){
-                        ll.setVisibility(View.VISIBLE);
-                        if(note.getText().toString().trim().length()>0){
-                            note.setVisibility(View.GONE);
-                            note_text.setText(note.getText().toString().trim());
-                            WindowManager windowManager = (WindowManager)mc.getSystemService(Context.WINDOW_SERVICE);
-                            int width = windowManager.getDefaultDisplay().getWidth();
-                            note_text.setLayoutParams(new LinearLayout.LayoutParams(width-50,50,4.0f));
-                            note_text.setVisibility(View.VISIBLE);
-                            edit.setVisibility(View.VISIBLE);
-                        }
-                    }else{
-                        ll.setVisibility(View.GONE);
-                    }
-                }
-            });
         }
 
     }
@@ -104,7 +81,7 @@ public class MyRecyclerAdapterHotel extends
     public void onBindViewHolder(final CustomViewHolder customViewHolder,final int i) {
         final FeedItemHotel feedItem = feedItemList.get(i);
         Typeface font1 = Typeface.createFromAsset(mContext.getAssets(),
-                "font/RobotoCondensed-Regular.ttf");
+                "font/pt-sans.regular.ttf");
         SpannableStringBuilder SS = new SpannableStringBuilder(
                 Html.fromHtml(feedItem.getTitle()));
         SS.setSpan(new CustomTypeFace("", font1), 0, SS.length(),
@@ -115,9 +92,10 @@ public class MyRecyclerAdapterHotel extends
                 Html.fromHtml(feedItem.getPrice()));
         SS.setSpan(new CustomTypeFace("", font1), 0, SS.length(),
                 Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-        customViewHolder.price.setText(SS);
-        Bitmap b = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.veg);
-        Bitmap b2 = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.nonveg);
+        String finalPrice = "₹"+SS;
+        customViewHolder.price.setText(finalPrice);
+        Bitmap b = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.veg);
+        Bitmap b2 = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.non_veg);
         if(feedItem.getVeg().toString().equals("1")){
             customViewHolder.imageView.setImageBitmap(b);
         }else{
