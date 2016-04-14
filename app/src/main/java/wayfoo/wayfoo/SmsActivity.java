@@ -60,7 +60,6 @@ public class SmsActivity extends AppCompatActivity implements View.OnClickListen
         btnRequestSms = (Button) findViewById(R.id.btn_request_sms);
         btnVerifyOtp = (Button) findViewById(R.id.btn_verify_otp);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnEditMobile = (ImageButton) findViewById(R.id.btn_edit_mobile);
         txtEditMobile = (TextView) findViewById(R.id.txt_edit_mobile);
         layoutEditMobile = (LinearLayout) findViewById(R.id.layout_edit_mobile);
 
@@ -121,12 +120,6 @@ public class SmsActivity extends AppCompatActivity implements View.OnClickListen
 
             case R.id.btn_verify_otp:
                 verifyOtp();
-                break;
-
-            case R.id.btn_edit_mobile:
-                viewPager.setCurrentItem(0);
-                layoutEditMobile.setVisibility(View.GONE);
-                pref.setIsWaitingForSms(false);
                 break;
         }
     }

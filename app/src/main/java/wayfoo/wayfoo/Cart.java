@@ -111,7 +111,7 @@ public class Cart extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(Cart.this,MainHotel.class));
+        startActivity(new Intent(Cart.this,AdditionalInfo.class));
         finish();
     }
 

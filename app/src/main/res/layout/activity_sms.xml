@@ -195,14 +195,6 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             android:textSize="16dp" />
-
-        <ImageButton
-            android:id="@+id/btn_edit_mobile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:src="@drawable/button_action" />
     </LinearLayout>
 
 </RelativeLayout>

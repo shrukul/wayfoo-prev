@@ -21,14 +21,16 @@ public class GcmMessageHandler extends GcmListenerService {
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
         String balance = data.getString("balance");
-        String typ = "Transaction Successful";
+        String typ="yay";
         String type = data.getString("type");
-        System.out.println("Type"+type);
-        if (type.equals("0")) {
+        int typeInt = Integer.parseInt(type);
+        System.out.println("Type"+typeInt);
+        if (typeInt == 0) {
             message = "Your Order will be delivered. The amount payable is ₹"+message;
-            typ = "Pin Code";
-        } else if (type.equals("1")) {
-            message = "Your Order has been Confirmed";
+            typ = "Done";
+        } else if(typeInt == 1){
+            message = "Your Order has been confirmed. The amount payable is ₹"+message;
+            typ = "Confirmed";
         }
 
         createNotification(typ, message);

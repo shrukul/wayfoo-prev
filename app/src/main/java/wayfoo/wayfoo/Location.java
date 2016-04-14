@@ -25,10 +25,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
-import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

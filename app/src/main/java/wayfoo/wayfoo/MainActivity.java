@@ -25,10 +25,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
-import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
-import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,101 +68,14 @@ public class MainActivity extends AppCompatActivity {
         a = new AsyncHttpTask();
         a.execute(url);
         final String url2 = "http://wayfoo.com/fav.php";
-        ImageView icon = new ImageView(this);
-        icon.setImageResource(R.mipmap.fab);
-        FloatingActionButton
-                actionButton = new FloatingActionButton.Builder(this)
-                .setBackgroundDrawable(R.mipmap.fab)
-                .setPosition(5)
-                .build();
-        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-
-        ImageView itemIcon1 = new ImageView(this);
-        itemIcon1.setImageResource(R.mipmap.sm1);
-
-        ImageView itemIcon2 = new ImageView(this);
-        itemIcon2.setImageResource(R.mipmap.sm2);
-
-
-        ImageView itemIcon3 = new ImageView(this);
-        itemIcon3.setImageResource(R.mipmap.sm3);
-
-        ImageView itemIcon4 = new ImageView(this);
-        itemIcon4.setImageResource(R.mipmap.sm4);
+/*        ImageView icon = new ImageView(this);
+        icon.setImageResource(R.mipmap.fab);*/
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         int width = size.x;
         int height = size.y;
-
-        SubActionButton button1 = itemBuilder
-                .setLayoutParams(new FloatingActionButton.LayoutParams(width/5, width/5))
-                .setContentView(itemIcon1).build();
-        SubActionButton button2 = itemBuilder.setContentView(itemIcon2)
-                .setLayoutParams(new FloatingActionButton.LayoutParams(width/5, width/5))
-                .setContentView(itemIcon2).build();
-        SubActionButton button3 = itemBuilder.setContentView(itemIcon3)
-                .setLayoutParams(new FloatingActionButton.LayoutParams(width/5, width/5))
-                .setContentView(itemIcon3).build();
-        SubActionButton button4 = itemBuilder
-                .setLayoutParams(new FloatingActionButton.LayoutParams(width/5, width/5))
-                .setContentView(itemIcon4).build();
-
-        FloatingActionMenu.Builder builder = new FloatingActionMenu.Builder(this);
-        builder.addSubActionView(button1);
-        builder.addSubActionView(button2);
-        builder.addSubActionView(button3);
-        builder.addSubActionView(button4);
-        builder.attachTo(actionButton);
-        builder.setRadius((2*width)/5);
-        builder.setStartAngle(200);
-        builder.setEndAngle(340);
-        builder.setStateChangeListener(new FloatingActionMenu.MenuStateChangeListener() {
-            @Override
-            public void onMenuOpened(FloatingActionMenu floatingActionMenu) {
-                Animation a = AnimationUtils.loadAnimation(MainActivity.this, R.anim.scale_up);
-                Display display = getWindowManager().getDefaultDisplay();
-                Point size = new Point();
-                display.getSize(size);
-                int width = size.x;
-                int height = size.y;
-                b.getLayoutParams().height =(height);
-                //b.setVisibility(View.VISIBLE);
-                b.startAnimation(a);
-            }
-
-            @Override
-            public void onMenuClosed(FloatingActionMenu floatingActionMenu) {
-                b.setVisibility(View.GONE);
-                b.setAnimation(null);
-            }
-        });
-        final FloatingActionMenu actionMenu = builder.build();
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,Profile.class));
-            }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,Location.class));
-            }
-        });
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,Fav.class));
-            }
-        });
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,MyOrders.class));
-            }
-        });
     }
 
     public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {

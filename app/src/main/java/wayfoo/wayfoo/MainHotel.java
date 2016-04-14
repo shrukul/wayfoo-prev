@@ -1,5 +1,6 @@
 package wayfoo.wayfoo;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -76,7 +77,7 @@ public class MainHotel extends AppCompatActivity {
             startActivity(new Intent(MainHotel.this,Search.class));
         }
         if(id == R.id.cart){
-            Intent it = new Intent(MainHotel.this,Cart.class);
+            Intent it = new Intent(MainHotel.this,AdditionalInfo.class);
             it.putExtra("title",getIntent().getExtras().getString("title"));
             it.putExtra("table",getIntent().getExtras().getString("table"));
             startActivity(it);
